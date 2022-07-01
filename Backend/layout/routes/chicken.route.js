@@ -23,15 +23,16 @@ router.patch('/run',async (req, res) => {
 })
 
 router.patch('/rest',async (req, res) => {
-  await chicken.run(req.body.name)
+  await chicken.rest(req.body.name)
   res.json("done")
 })
 
 router.post('/create', async (req, res) => {
   const chickens = await chicken.create(req.body);
+  res.json("done")
 })
 
-router.get('/chickens/:chickenId', async (req, res) => {
+router.get('/getByID/:chickenId', async (req, res) => {
   const chickenId = Number(req.params.chickenId);
   const specificChicken = await chicken.getById(chickenId);
   res.json(specificChicken)
