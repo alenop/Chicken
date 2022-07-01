@@ -22,6 +22,11 @@ router.patch('/run',async (req, res) => {
   res.json("done")
 })
 
+router.patch('/rest',async (req, res) => {
+  await chicken.run(req.body.name)
+  res.json("done")
+})
+
 router.post('/create', async (req, res) => {
   const chickens = await chicken.create(req.body);
 })
