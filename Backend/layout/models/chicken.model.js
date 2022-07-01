@@ -47,6 +47,14 @@ class Chicken {
             values: [name]
         })
     }
+    static async rest(name){
+        const result = await PostgresStore.client.query({
+            text: `UPDATE  ${Chicken.tableName}
+            set isRunning=false
+        where name=$1`,
+            values: [name]
+        })
+    }
 
     static async getById(id) {
         const result = await PostgresStore.client.query({
