@@ -12,8 +12,17 @@ router.get('/getAllByCategory/:category', async (req, res) => {
   res.json(chickens);
 })
 
+router.delete('/delete',async (req, res) => {
+  await chicken.delete(req.body.name)
+  res.json("done")
+})
+
+router.patch('/run',async (req, res) => {
+  await chicken.run(req.body.name)
+  res.json("done")
+})
+
 router.post('/create', async (req, res) => {
-  req.body.elo = 1000
   const chickens = await chicken.create(req.body);
 })
 

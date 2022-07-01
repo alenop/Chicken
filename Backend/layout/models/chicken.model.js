@@ -25,11 +25,27 @@ class Chicken {
         );
         return result.rows;
     }
+
+    static async delete(name){
+        await PostgresStore.client.query(
+            `DELETE FROM ${Chicken.tableName}
+            WHERE name=$1`,
+            [name]
+            )
+    }
     static async getAllBy(category) {
         const result = await PostgresStore.client.query(
             `SELECT ${category} FROM ${Chicken.tableName}`
         );
         return result.rows;
+    }
+    static async run(name){
+        const result = await PostgresStore.client.query({
+            text: `UPDATE  ${Chicken.tableName}
+            set isRunning=true,steps=steps+1
+        where name=$1`,
+            values: [name]
+        })
     }
 
     static async getById(id) {
@@ -53,9 +69,9 @@ class Chicken {
     static async create(chicken) {
         const result = await PostgresStore.client.query({
             text: `INSERT INTO ${Chicken.tableName}
-                        (name,elo,password)
+                        (name,birthday,weight)
              VALUES ($1,$2,$3)`,
-            values: [chicken.chickenname, chicken.elo, chicken.password]
+            values: [chicken.name, chicken.birthday, chicken.weight]
         })
         return result.rows[0]
     }
