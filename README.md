@@ -9,3 +9,5 @@ Now you can even let them rest !!
 
 /chicken/run for running
 /chicken/rest for let them rest
+
+You can test with the Postman app.
